@@ -1,0 +1,227 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+.container-form-login {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form dan Input */
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input[type="text"], input[type="number"], input[type="date"], input[type="file"], textarea {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+textarea {
+    height: 100px;
+}
+
+input[type="submit"] {
+    padding: 10px 40px;
+    background-color: #007BFF;
+    display: flex;
+    margin: auto;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Tampilan Login Santri */
+.container-login-santri {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: #acc53c;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.container-judul-login-santri {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.submit-login-santri {
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.submit-login-santri a {
+    color: #007BFF;
+}
+
+.submit-login-santri a:hover {
+    text-decoration: underline;
+}
+/* Tampilan Login Guru */
+.container-login-guru {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: #9ee97b;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.container-judul-login-guru {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.submit-login-guru {
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.submit-login-guru a {
+    color: #007BFF;
+}
+
+.submit-login-guru a:hover {
+    text-decoration: underline;
+}
+/* Table */
+.table {
+    margin-top: 20px;
+}
+
+.table table {
+    width: 100%;
+    border-collapse: collapse; /* Pastikan border tidak ganda */
+}
+
+.table th, td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ddd; 
+}
+
+.table th {
+    background: #f2f2f2;
+}
+
+/* Tambahan untuk border yang lebih tegas */
+.table th {
+    border-bottom: 2px solid #4CAF50; 
+}
+
+.table td {
+    border-bottom: 1px solid #ddd; 
+}
+
+.table img {
+    max-width: 100px;
+    height: auto;
+}
+
+.container,
+.content
+{
+    width: 90%;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    border: 2px solid #4CAF50; /* Tambahan border hijau */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+/* Gaya untuk Container Judul */
+.container-judul,
+.content-judul {
+    background-color: #4CAF50; 
+    color: white; 
+    padding: 15px;
+    border-radius: 5px; 
+    text-align: center; 
+    margin-bottom: 20px;
+    border: 2px solid #fff;
+}
+
+.container-judul h2 {
+    font-size: 27px; 
+    margin-bottom: 10px; 
+}
+
+.container-judul a,
+.content-judul a {
+    display: inline-block; 
+    background-color: #19d3a4; 
+    color: white;
+    padding: 10px 15px; 
+    border-radius: 5px; 
+    text-decoration: none; 
+    transition: background-color 0.3s; 
+}
+
+.container-judul a:hover {
+    background-color: #074d3b ; 
+}
+/* Button */
+.table a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    background-color: #00ff08;
+    border-radius: 10px;
+
+}
+.table td:last-child a{
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    background-color: #f70505;
+    border-radius: 10px;
+}
+.table a:hover {
+    background-color: #157718;
+}
+.table td:last-child a:hover {
+    background-color: #e01515;
+}
+/* Form Box */
+.box-judul {
+    background-color: #19d3a4; 
+    color: white; 
+    padding: 20px; 
+    text-align: center; 
+    border-radius: 5px; 
+    margin: 20px auto;
+    width: 90%;
+}
+
+.box {
+    width: 90%;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
