@@ -47,5 +47,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         </form>
     </div>    
     </div>
+    <footer>
+        <p>&copy; 2024 by Habib Husain Nurrohim. All rights reserved.</p>
+    </footer>
 </body>
 </html>

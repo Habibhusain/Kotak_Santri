@@ -47,5 +47,8 @@ if($login_santri)
         </form>
     </div>    
     </div>
+    <footer>
+        <p>&copy; 2024 by Habib Husain Nurrohim. All rights reserved.</p>
+    </footer>
 </body>
 </html>

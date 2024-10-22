@@ -68,7 +68,7 @@ function tambah_santri()
 
 function tampil_data_pengaduan_guru()
 {
-    $tampil_data_pengaduan = "SELECT p.*, s.nama_santri FROM pengaduan p JOIN santri s ON p.id_santri = s.id_santri";
+    $tampil_data_pengaduan = "SELECT pengaduan.*, santri.nama_santri FROM pengaduan JOIN santri ON pengaduan.id_santri = santri.id_santri";
 
     $eksekusi_tampil_pengaduan = connect_db()->query($tampil_data_pengaduan);
     $tampil_guru = array();
@@ -81,8 +81,8 @@ function tampil_data_pengaduan_guru()
 
 function tampil_data_pengaduan_santri()
 {
-    $id = $_SESSION['id_santri'];
-    $tampil_data_pengaduan = "SELECT * FROM pengaduan WHERE id_santri = '$id'";
+    $id = $_SESSION['id_santri']['id_santri'];
+    $tampil_data_pengaduan = "SELECT pengaduan.*, santri.nama_santri FROM pengaduan JOIN santri ON pengaduan.id_santri = santri.id_santri WHERE pengaduan.id_santri = '$id' ";
     $eksekusi_tampil_pengaduan = connect_db()->query($tampil_data_pengaduan);
     $pengaduan_santri = array();
 
@@ -92,18 +92,6 @@ function tampil_data_pengaduan_santri()
     return $pengaduan_santri;
 }
 
-function tampil_data_tanggapan($id_guru)
-{
-    $tampil_data_tanggapan = "SELECT * FROM tanggapan WHERE id_guru ='$id_guru'";
-    $eksekusi_tampil_tanggapan = connect_db()->query($tampil_data_tanggapan);
-    $tampil_guru = array();
-
-    while($tampil = $eksekusi_tampil_tanggapan->fetch_assoc())
-    {
-        $tampil_guru[]=$tampil;
-    }
-    return $tampil_guru;
-}
 
 function upload_foto_pengaduan()
 {
@@ -137,27 +125,27 @@ function upload_foto_pengaduan()
 
 function tambah_data_pengaduan()
 {
-    $id_santri = $_SESSION['id_santri'];
+    $id_santri = $_SESSION['id_santri']['id_santri'];
     $isi_pengaduan = $_POST['isi_pengaduan'];
     $foto = upload_foto_pengaduan();
-    $isi_pengaduan = $_POST['isi_pengaduan'];
-    $tanggal_pengaduan = date('Y-m-d');
-    
-    $tambah_data_pengaduan ="INSERT INTO pengaduan (tgl_pengaduan,id_santri,isi_pengaduan,foto)
-                                VALUES ($tanggal_pengaduan,'$id_santri','$isi_pengaduan','$foto')";
-    $eksekusi_tambah_pengaduan = connect_db()->query($tambah_data_pengaduan);
+    var_dump($id_santri);
+    if ($foto === FALSE) {
+        echo 'Upload foto gagal atau format tidak diizinkan.';
+        return false;
+    }
 
-    return $eksekusi_tambah_pengaduan;
+    $tambah_data_pengaduan = connect_db()->query("INSERT INTO pengaduan (tgl_pengaduan, id_santri, isi_pengaduan, foto) 
+    VALUES (NOW(),'$id_santri','$isi_pengaduan','$foto')");
+   return $tambah_data_pengaduan;
 }
+
+
 function get_pengaduan_by_id($id_pengaduan) {
-    $db = connect_db();
-    $sql = "
-        SELECT p.*, s.nama_santri 
-        FROM pengaduan p 
-        JOIN santri s ON p.id_santri = s.id_santri 
-        WHERE p.id_pengaduan = '$id_pengaduan'";
+    $sql = "SELECT pengaduan.*, santri.nama_santri FROM pengaduan  
+        JOIN santri ON pengaduan.id_santri = santri.id_santri 
+        WHERE pengaduan.id_pengaduan = '$id_pengaduan'";
     
-    $result = $db->query($sql);
+    $result = connect_db()->query($sql);
 
     if ($result->num_rows > 0) {
         return $result->fetch_assoc();
@@ -166,28 +154,100 @@ function get_pengaduan_by_id($id_pengaduan) {
 }
 
 
-
-function tambah_tanggapan($id_pengaduan, $id_guru, $isi_tanggapan) {
-
-    $tambah_tanggapan = "INSERT INTO tanggapan (id_pengaduan, tgl_pengaduan, isi_tanggapan, id_guru)
-                         VALUES ('$id_pengaduan', NOW(), '$isi_tanggapan', '$id_guru')";
-    return connect_db()->query($tambah_tanggapan);
+function tambah_tanggapan($id_pengaduan) 
+{
+    $tanggapan = $_POST['isi_tanggapan'];
+    $id_guru = $_SESSION['id_guru']['id_guru'];
+    $tambah_tanggapan = connect_db()->query("INSERT INTO tanggapan (id_pengaduan, tgl_pengaduan, isi_tanggapan, id_guru) VALUES ('$id_pengaduan', NOW(),'$tanggapan', '$id_guru')");
+    return $tambah_tanggapan;
 }
 
-function tambah_pengaduan($id_santri, $isi_pengaduan, $foto) {
-    $db = connect_db();
-    $stmt = $db->prepare("INSERT INTO pengaduan (id_santri, isi_pengaduan, foto, tgl_pengaduan) VALUES (?, ?, ?, NOW())");
-    $stmt->bind_param("iss", $id_santri, $isi_pengaduan, $foto);
-    return $stmt->execute();
-}
+function tampil_data_tanggapan_santri()
+{
+    $id_santri = $_SESSION['id_santri']['id_santri'];
+    
+    $sql = "SELECT t.*, g.nama_guru 
+            FROM tanggapan t 
+            JOIN pengaduan p ON t.id_pengaduan = p.id_pengaduan
+            JOIN santri s ON p.id_santri = s.id_santri
+            JOIN guru g ON t.id_guru = g.id_guru
+            WHERE s.id_santri = '$id_santri'";
+    
+    $eksekusi_tampil_tanggapan = connect_db()->query($sql);
+    $tanggapan_santri = array();
 
-function tampil_data_pengaduan() {
-    $db = connect_db();
-    $sql = "SELECT * FROM pengaduan";
-    $result = $db->query($sql);
-    $data = [];
-    while ($row = $result->fetch_assoc()) {
-        $data[] = $row;
+    while ($row = $eksekusi_tampil_tanggapan->fetch_assoc()) {
+        $tanggapan_santri[] = $row;
     }
-    return $data;
+    
+    return $tanggapan_santri;
 }
+function tampil_tanggapan_by_pengaduan($id_pengaduan) {
+    $sql = "SELECT t.*, g.nama_guru 
+            FROM tanggapan t
+            JOIN guru g ON t.id_guru = g.id_guru
+            WHERE t.id_pengaduan = '$id_pengaduan'";
+    
+    $eksekusi = connect_db()->query($sql);
+    $tanggapan = array();
+
+    while ($row = $eksekusi->fetch_assoc()) {
+        $tanggapan[] = $row;
+    }
+
+    return $tanggapan;
+}
+function tampil_pengaduan_dan_santri() {
+    $sql = "SELECT p.*, s.nama_santri 
+            FROM pengaduan p
+            JOIN santri s ON p.id_santri = s.id_santri";
+    $eksekusi = connect_db()->query($sql);
+    $pengaduan = array();
+
+    while ($row = $eksekusi->fetch_assoc()) {
+        $pengaduan[] = $row;
+    }
+
+    return $pengaduan;
+}
+
+function edit_pengaduan($id_pengaduan, $isi_pengaduan, $foto) {
+
+    if (!empty($foto)) {
+        $update_query = "UPDATE pengaduan SET isi_pengaduan = '$isi_pengaduan', foto = '$foto' WHERE id_pengaduan = '$id_pengaduan'";
+    } else {
+        $update_query = "UPDATE pengaduan SET isi_pengaduan = '$isi_pengaduan' WHERE id_pengaduan = '$id_pengaduan'";
+    }
+
+    if (connect_db()->query($update_query) === TRUE) {
+        // Jika ada foto baru, pindahkan file ke direktori tujuan
+        if (!empty($foto)) {
+            $target_dir = "../image/";
+            $target_file = $target_dir . basename($foto);
+            move_uploaded_file($_FILES['foto']['tmp_name'], $target_file);
+        }
+        return true;
+    } else {
+        return false; 
+    }
+}
+
+function edit_tanggapan_guru($id_tanggapan, $isi_tanggapan) {
+
+    // Membuat query SQL untuk mengedit tanggapan
+    $edit_tanggapan_guru = "UPDATE tanggapan SET isi_tanggapan = '$isi_tanggapan' WHERE id_tanggapan = '$id_tanggapan'";
+
+    $edit_tanggapan = connect_db()->query($edit_tanggapan_guru);
+
+    return $edit_tanggapan;
+}
+function get_tanggapan_by_id($id_tanggapan) {
+    $query = "SELECT * FROM tanggapan WHERE id_tanggapan = '$id_tanggapan'";
+    $result = connect_db()->query($query);
+    if ($result->num_rows > 0) {
+
+        return $result->fetch_assoc();
+    }
+    return false;
+}
+

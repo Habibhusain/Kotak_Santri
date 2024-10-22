@@ -26,10 +26,14 @@ $data_pengaduan = tampil_data_pengaduan_guru();
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+    <nav class="navbar">
+    <a href="logout.php" onclick="return confirm('Yakin Mau logout???')">Logout</a>
+    </nav>
 <div class="container">
         <div class="container-judul">
     <h1>Dashboard</h1>
     <a href="tambah_santri.php">Tambah Santri</a>
+    <a href="lihat_tanggapan.php">Cek Tanggapan</a>
     </div>
     <div class="table">
     <table>
@@ -60,7 +64,9 @@ $data_pengaduan = tampil_data_pengaduan_guru();
         </tbody>
     </table>    
     </div>
-    <a href="logout.php" onclick="return confirm('Yakin Mau logout???')">Logout</a>
 </div>
+<footer>
+        <p>&copy; 2024 by Habib Husain Nurrohim. All rights reserved.</p>
+    </footer>
 </body>
 </html>

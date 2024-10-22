@@ -46,6 +46,8 @@ input[type="submit"] {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 17px;
+
 }
 
 input[type="submit"]:hover {
@@ -141,10 +143,45 @@ input[type="submit"]:hover {
     max-width: 100px;
     height: auto;
 }
+.navigasi {
+    background-color: #0056b3; 
+    padding: 10px; 
+    text-align: right; 
+    position: relative; 
+}
+.navigasi a {
+    color: white; 
+    text-decoration: none; 
+    padding: 10px 20px; 
+    margin-left: 15px;
+    border-radius: 5px; 
+    transition: background-color 0.3s; 
+}
 
-.container,
-.content
-{
+.navigasi a:hover {
+    background-color: #4CAF50; 
+    color: white; 
+}
+.navbar {
+    background-color: #4CAF50; 
+    padding: 10px; 
+    text-align: right; 
+    position: relative; 
+}
+.navbar a {
+    color: white; 
+    text-decoration: none; 
+    padding: 10px 20px; 
+    margin-left: 15px;
+    border-radius: 5px; 
+    transition: background-color 0.3s; 
+}
+
+.navbar a:hover {
+    background-color: #0056b3; 
+    color: white; 
+}
+.container{
     width: 90%;
     margin: 20px auto;
     background: white;
@@ -153,9 +190,29 @@ input[type="submit"]:hover {
     border: 2px solid #4CAF50; /* Tambahan border hijau */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-/* Gaya untuk Container Judul */
-.container-judul,
+.content
+{
+    width: 90%;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    border: 2px solid #0056b3; /* Tambahan border biru */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 .content-judul {
+    background-color: #0056b3; 
+    color: white; 
+    padding: 15px;
+    border-radius: 5px; 
+    text-align: center; 
+    margin-bottom: 20px;
+    border: 2px solid #fff;
+}
+
+/* Gaya untuk Container Judul */
+.container-judul{
     background-color: #4CAF50; 
     color: white; 
     padding: 15px;
@@ -163,6 +220,7 @@ input[type="submit"]:hover {
     text-align: center; 
     margin-bottom: 20px;
     border: 2px solid #fff;
+
 }
 
 .container-judul h2 {
@@ -224,4 +282,174 @@ input[type="submit"]:hover {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.box-1 form a{
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+    font-size: 20px;
+    text-decoration: none;
+}
+.boxes-judul {
+    background-color: #0056b3; 
+    color: white; 
+    padding: 20px; 
+    text-align: center; 
+    border-radius: 5px; 
+    margin: 20px auto;
+    width: 90%;
+}
+
+.boxes {
+    width: 90%;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.boxes-1 form a{
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+    font-size: 20px;
+    text-decoration: none;
+}
+.content-table {
+    margin-top: 20px;
+}
+
+.content-table table {
+    width: 100%;
+    border-collapse: collapse; /* Pastikan border tidak ganda */
+}
+
+.content-table th, td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ddd; 
+}
+
+.content-table th {
+    background: #f2f2f2;
+}
+
+/* Tambahan untuk border yang lebih tegas */
+.content-table th {
+    border-bottom: 2px solid #0056b3; 
+}
+
+.content-table td {
+    border-bottom: 1px solid #ddd; 
+}
+/* Button */
+.content-table a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    background-color: #0b776e;
+    border-radius: 10px;
+
+}
+.content-table td:last-child a{
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    background-color: #157718;
+    border-radius: 10px;
+}
+.content-table a:hover {
+    background-color: #157718;
+}
+.content-table td:last-child a:hover {
+    background-color: #0b776e;
+}
+.content-table img {
+    max-width: 100px;
+    height: auto;
+}
+.content-table {
+    margin-top: 20px;
+}
+
+.content-table table {
+    width: 100%;
+    border-collapse: collapse; /* Pastikan border tidak ganda */
+}
+
+.content-table th, td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ddd; 
+}
+
+.content-table th {
+    background: #f2f2f2;
+}
+
+/* Tambahan untuk border yang lebih tegas */
+.container-table-guru th {
+    border-bottom: 2px solid #0056b3; 
+}
+
+.container-table-guru td {
+    border-bottom: 1px solid #ddd; 
+}
+/* Button */
+.container-table-guru a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    background-color: #0b776e;
+    border-radius: 10px;
+
+}
+.container-table-guru td:last-child a{
+    text-decoration: none;
+    color: white;
+    padding: 7px 14px;
+    background-color: #157718;
+    border-radius: 10px;
+}
+.container-table-guru a:hover {
+    background-color: #157718;
+}
+.container-table-guru td:last-child a:hover {
+    background-color: #0b776e;
+}
+.container-table-guru img {
+    max-width: 100px;
+    height: auto;
+}
+ul{
+    list-style-type: none;
+}
+@media (max-width: 600px) {
+    .navbar {
+        text-align: center; /* Pusatkan teks pada layar kecil */
+    }
+    
+    .navbar a {
+        display: block; /* Tampilkan link sebagai blok untuk layar kecil */
+        margin: 5px 0; /* Jarak antar link */
+    }
+    .navigasi {
+        text-align: center; /* Pusatkan teks pada layar kecil */
+    }
+    
+    .navigasi a {
+        display: block; /* Tampilkan link sebagai blok untuk layar kecil */
+        margin: 5px 0; /* Jarak antar link */
+    }
+    
+}
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 20px;
 }
