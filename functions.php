@@ -1,13 +1,13 @@
 <?php 
 require "config/config.php";
 
-
 function connect_db() {
     $db = new mysqli (HOSTNAME,USERNAME,PASSWORD,DATABASE);
     return $db;
 }
 
 function login_santri() {
+
     $nama_santri = $_POST['nama_santri'];
     $nomor_santri = $_POST['nomor_santri'];
 
@@ -122,8 +122,7 @@ function upload_foto_pengaduan() {
 }
 
 
-function tambah_data_pengaduan()
-{
+function tambah_data_pengaduan() {
 
     $id_santri = $_SESSION['id_santri']['id_santri'];
     $isi_pengaduan = $_POST['isi_pengaduan'];
@@ -155,8 +154,7 @@ function get_pengaduan_by_id($id_pengaduan) {
 }
 
 
-function tambah_tanggapan($id_pengaduan) 
-{
+function tambah_tanggapan($id_pengaduan)  {
 
     $tanggapan = $_POST['isi_tanggapan'];
     $id_guru = $_SESSION['id_guru']['id_guru'];
@@ -185,6 +183,7 @@ function tampil_data_tanggapan_santri() {
     
     return $tanggapan_santri;
 }
+
 function tampil_tanggapan_by_pengaduan($id_pengaduan) {
 
     $sql = "SELECT t.*, g.nama_guru 
@@ -201,6 +200,7 @@ function tampil_tanggapan_by_pengaduan($id_pengaduan) {
 
     return $tanggapan;
 }
+
 function tampil_pengaduan_dan_santri() {
 
     $sql = "SELECT p.*, s.nama_santri 
@@ -246,6 +246,7 @@ function edit_tanggapan_guru($id_tanggapan, $isi_tanggapan) {
 
     return $edit_tanggapan;
 }
+
 function get_tanggapan_by_id($id_tanggapan) {
 
     $query = "SELECT * FROM tanggapan WHERE id_tanggapan = '$id_tanggapan'";
@@ -254,5 +255,6 @@ function get_tanggapan_by_id($id_tanggapan) {
 
         return $result->fetch_assoc();
     }
+    
     return false;
 }
