@@ -1,19 +1,16 @@
-<?php
-session_start();
-
+<?php session_start();
 require "functions.php";
 
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $login_santri = login_santri();
 
-if($login_santri)
-{
+if ($login_santri) {
     $_SESSION['id_santri'] = $login_santri;
     echo "<script>
     alert('Berhasil Login');
     window.location='santri/index.php';
     </script>";
-}else{
+} else {
     echo "<script>
     alert('Gagal Login');
     window.location='index.php';

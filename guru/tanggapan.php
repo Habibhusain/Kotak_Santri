@@ -1,5 +1,4 @@
-<?php
-session_start();
+<?php session_start();
 require "../functions.php";
 
 // Cek apakah guru sudah login

@@ -1,9 +1,7 @@
-<?php
-session_start();
+<?php session_start();
 require "../functions.php";
 
-if(!isset($_SESSION['id_guru']))
-{
+if (!isset($_SESSION['id_guru'])) {
     echo "<script>
     alert('Login Terlebih Dahulu');
     window.location='index.php';

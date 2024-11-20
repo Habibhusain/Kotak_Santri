@@ -1,18 +1,15 @@
-<?php
-session_start();
-
+<?php session_start();
 require "../functions.php";
 
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $login_guru = login_guru();
-    if($login_guru)
-    {
+    if ($login_guru) {
     $_SESSION['id_guru']= $login_guru;
     echo "<script>
     alert('Berhasil Login');
     window.location ='dashboard.php';
     </script>";
-    }else{
+    } else {
     echo "<script>
     alert('Nama Pengguna Atau Password Salah');
     window.location ='index.php';

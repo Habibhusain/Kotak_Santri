@@ -12,10 +12,10 @@ if (!isset($_SESSION['id_santri'])) {
 
 if (!isset($_GET['id_pengaduan'])) {
     echo "<script>
-    alert('ID Pengaduan tidak ditemukan');
-    window.location='index.php';
-    </script>";
-    exit();
+            alert('ID Pengaduan tidak ditemukan');
+            window.location='index.php';
+          </script>";
+          exit();
 }
 
 $id_pengaduan = $_GET['id_pengaduan'];
@@ -66,7 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h1>Edit Pengaduan</h1>
         </div>
     <div class="boxes">
-
         <div class="boxes-1">
         <form action="" method="post" enctype="multipart/form-data">
             <label for="isi_pengaduan">Isi Pengaduan:</label>

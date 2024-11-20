@@ -1,5 +1,4 @@
-<?php
-session_start();
+<?php session_start();
 require "../functions.php";
 
 if (!isset($_SESSION['id_santri'])) {

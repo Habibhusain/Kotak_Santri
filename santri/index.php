@@ -1,21 +1,17 @@
-<?php
-session_start();
+<?php session_start();
 require "../functions.php";
 
-if(!isset($_SESSION['id_santri']))
-{
+if (!isset($_SESSION['id_santri'])) {
     echo "<script>
-    alert('Login Terlebih Dahulu');
-    window.location='../index.php';
-    </script>";
-    exit();
+            alert('Login Terlebih Dahulu');
+            window.location='../index.php';
+          </script>";
+          exit();
 }
     
     $pengaduan_santri = tampil_data_pengaduan_santri();
 
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

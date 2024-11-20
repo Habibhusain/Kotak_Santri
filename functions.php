@@ -2,60 +2,59 @@
 require "config/config.php";
 
 
-function connect_db()
-{
+function connect_db() {
     $db = new mysqli (HOSTNAME,USERNAME,PASSWORD,DATABASE);
     return $db;
 }
 
-function login_santri()
-{
+function login_santri() {
     $nama_santri = $_POST['nama_santri'];
     $nomor_santri = $_POST['nomor_santri'];
 
     $sql_login_santri = "SELECT * FROM santri WHERE nama_santri = '$nama_santri' AND nomor_santri = '$nomor_santri'";
     $eksekusi_login_santri = connect_db()->query($sql_login_santri);
 
-    if($eksekusi_login_santri->num_rows > 0){
+    if ($eksekusi_login_santri->num_rows > 0) {
         $user = $eksekusi_login_santri->fetch_assoc();
         $_SESSION['id_santri'] = $user['id_santri'];
         return $user;
-    }else{
+    } else {
         return false;
     }
 }
 
-function login_guru()
-{
+function login_guru() {
+
     $nama_guru = $_POST['nama_guru'];
     $nomor_guru = $_POST['nomor_guru'];
 
     $sql_login_guru = "SELECT * FROM guru WHERE nama_guru = '$nama_guru' AND nomor_guru = '$nomor_guru'";
     $eksekusi_login_guru = connect_db()->query($sql_login_guru);
 
-    if($eksekusi_login_guru->num_rows > 0){
+    if ($eksekusi_login_guru->num_rows > 0) {
         $user = $eksekusi_login_guru->fetch_assoc();
         $_SESSION['id_guru'] = $user['id_guru'];
         return $user;
-    }else{
+    } else {
         return false;
     }
 }
 
-function tambah_santri()
-{
+function tambah_santri() {
+
     $nama_santri = $_POST['nama_santri'];
     $nomor_santri = $_POST['nomor_santri'];
     $asal_santri = $_POST['asal'];
+
     $cek_login_santri = "SELECT * FROM santri WHERE nomor_santri = '$nomor_santri'";
     $eksekusi_cek_login_santri = connect_db()->query($cek_login_santri);
 
-    if($eksekusi_cek_login_santri->num_rows > 0){
+    if ($eksekusi_cek_login_santri->num_rows > 0) {
         echo "<script>
         alert('Nomor Santri sudah digunakan');
         window.location='index.php';
         </script>";
-    }else{
+    } else {
         $tambah_santri = "INSERT INTO santri (nama_santri,nomor_santri,asal) VALUES ('$nama_santri','$nomor_santri','$asal_santri')";
         $tambah = connect_db()->query($tambah_santri);
     if ($tambah) {
@@ -66,21 +65,21 @@ function tambah_santri()
  }
 }
 
-function tampil_data_pengaduan_guru()
-{
-    $tampil_data_pengaduan = "SELECT pengaduan.*, santri.nama_santri FROM pengaduan JOIN santri ON pengaduan.id_santri = santri.id_santri";
+function tampil_data_pengaduan_guru() {
 
+    $tampil_data_pengaduan = "SELECT pengaduan.*, santri.nama_santri FROM pengaduan JOIN santri ON pengaduan.id_santri = santri.id_santri";
     $eksekusi_tampil_pengaduan = connect_db()->query($tampil_data_pengaduan);
     $tampil_guru = array();
 
     while ($row = $eksekusi_tampil_pengaduan->fetch_assoc()) {
         $tampil_guru[] = $row;
     }
+
     return $tampil_guru;
 }
 
-function tampil_data_pengaduan_santri()
-{
+function tampil_data_pengaduan_santri() {
+    
     $id = $_SESSION['id_santri']['id_santri'];
     $tampil_data_pengaduan = "SELECT pengaduan.*, santri.nama_santri FROM pengaduan JOIN santri ON pengaduan.id_santri = santri.id_santri WHERE pengaduan.id_santri = '$id' ";
     $eksekusi_tampil_pengaduan = connect_db()->query($tampil_data_pengaduan);
@@ -93,8 +92,8 @@ function tampil_data_pengaduan_santri()
 }
 
 
-function upload_foto_pengaduan()
-{
+function upload_foto_pengaduan() {
+
     $ambil_ukuran_file = $_FILES['foto']['size'];
     $ukuran_diizinkan = 10000000;
 
@@ -125,6 +124,7 @@ function upload_foto_pengaduan()
 
 function tambah_data_pengaduan()
 {
+
     $id_santri = $_SESSION['id_santri']['id_santri'];
     $isi_pengaduan = $_POST['isi_pengaduan'];
     $foto = upload_foto_pengaduan();
@@ -136,6 +136,7 @@ function tambah_data_pengaduan()
 
     $tambah_data_pengaduan = connect_db()->query("INSERT INTO pengaduan (tgl_pengaduan, id_santri, isi_pengaduan, foto) 
     VALUES (NOW(),'$id_santri','$isi_pengaduan','$foto')");
+
    return $tambah_data_pengaduan;
 }
 
@@ -156,14 +157,16 @@ function get_pengaduan_by_id($id_pengaduan) {
 
 function tambah_tanggapan($id_pengaduan) 
 {
+
     $tanggapan = $_POST['isi_tanggapan'];
     $id_guru = $_SESSION['id_guru']['id_guru'];
     $tambah_tanggapan = connect_db()->query("INSERT INTO tanggapan (id_pengaduan, tgl_pengaduan, isi_tanggapan, id_guru) VALUES ('$id_pengaduan', NOW(),'$tanggapan', '$id_guru')");
+
     return $tambah_tanggapan;
 }
 
-function tampil_data_tanggapan_santri()
-{
+function tampil_data_tanggapan_santri() {
+
     $id_santri = $_SESSION['id_santri']['id_santri'];
     
     $sql = "SELECT t.*, g.nama_guru 
@@ -183,6 +186,7 @@ function tampil_data_tanggapan_santri()
     return $tanggapan_santri;
 }
 function tampil_tanggapan_by_pengaduan($id_pengaduan) {
+
     $sql = "SELECT t.*, g.nama_guru 
             FROM tanggapan t
             JOIN guru g ON t.id_guru = g.id_guru
@@ -198,6 +202,7 @@ function tampil_tanggapan_by_pengaduan($id_pengaduan) {
     return $tanggapan;
 }
 function tampil_pengaduan_dan_santri() {
+
     $sql = "SELECT p.*, s.nama_santri 
             FROM pengaduan p
             JOIN santri s ON p.id_santri = s.id_santri";
@@ -242,6 +247,7 @@ function edit_tanggapan_guru($id_tanggapan, $isi_tanggapan) {
     return $edit_tanggapan;
 }
 function get_tanggapan_by_id($id_tanggapan) {
+
     $query = "SELECT * FROM tanggapan WHERE id_tanggapan = '$id_tanggapan'";
     $result = connect_db()->query($query);
     if ($result->num_rows > 0) {
@@ -250,4 +256,3 @@ function get_tanggapan_by_id($id_tanggapan) {
     }
     return false;
 }
-
